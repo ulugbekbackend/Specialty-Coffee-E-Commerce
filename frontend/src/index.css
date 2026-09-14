@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+@theme {
+  --color-espresso-950: #140c06;
+  --color-espresso-900: #1a1009;
+  --color-espresso-850: #211509;
+  --color-espresso-800: #2a1b0e;
+  --color-espresso-700: #3a2716;
+  --color-espresso-600: #4e3520;
+
+  --color-cream-50: #faf3e4;
+  --color-cream-100: #f2e6cf;
+  --color-cream-300: #e0c9a4;
+  --color-cream-500: #c4a57c;
+  --color-cream-700: #97795a;
+
+  --color-honey-300: #f4c76f;
+  --color-honey-400: #e9a83e;
+  --color-honey-500: #d48a26;
+  --color-honey-600: #a96a1c;
+
+  --color-olive-300: #b9c287;
+  --color-olive-400: #9aa85f;
+  --color-olive-500: #7d8c4a;
+
+  --color-rust-300: #e0906f;
+  --color-rust-400: #c96f4c;
+  --color-rust-500: #a8522f;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Karla", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-espresso-950);
+  color: var(--color-cream-100);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-honey-400);
+  color: var(--color-espresso-950);
+}
+
+/* ---------- ambient layered background ---------- */
+.ambient {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(58rem 40rem at 8% -10%, rgba(233, 168, 62, 0.13), transparent 60%),
+    radial-gradient(48rem 36rem at 105% 12%, rgba(168, 82, 47, 0.14), transparent 62%),
+    radial-gradient(52rem 44rem at 50% 118%, rgba(125, 140, 74, 0.1), transparent 65%),
+    var(--color-espresso-950);
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.anim-marquee {
+  animation: marquee 30s linear infinite;
+}
+.anim-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes steam-rise {
+  0% { opacity: 0; transform: translateY(8px) scale(0.92); }
+  35% { opacity: 0.75; }
+  100% { opacity: 0; transform: translateY(-20px) scale(1.08); }
+}
+.steam-line {
+  stroke: rgba(242, 230, 207, 0.55);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  fill: none;
+  animation: steam-rise 3.4s ease-in-out infinite;
+}
+.steam-2 { animation-delay: 1.15s; }
+.steam-3 { animation-delay: 2.3s; }
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.anim-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.55em) rotate(3deg); }
+  to { opacity: 1; transform: none; }
+}
+.word-swap {
+  display: inline-block;
+  animation: word-in 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes cart-pop {
+  0% { transform: scale(0.5); }
+  55% { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+.cart-pop {
+  animation: cart-pop 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+.toast-in {
+  animation: toast-in 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(22px) scale(0.975); }
+  to { opacity: 1; transform: none; }
+}
+.modal-in {
+  animation: modal-in 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.78); }
+}
+.pulse-dot {
+  animation: pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes ember-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.5; }
+  50% { transform: translateY(-26px) rotate(14deg); opacity: 1; }
+}
+.ember-float {
+  animation: ember-float 6s ease-in-out infinite;
+}
+.ember-float-b { animation-duration: 7.5s; animation-delay: 1.4s; }
+.ember-float-c { animation-duration: 5.2s; animation-delay: 2.6s; }
+
+.btn-press {
+  transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+.btn-press:active {
+  transform: scale(0.955);
+}
+
+/* roast curve draw-on */
+.curve-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 2.4s cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+.curve-drawn .curve-path {
+  stroke-dashoffset: 0;
+}
+.curve-marker {
+  opacity: 0;
+  transition: opacity 0.5s ease 2.1s;
+}
+.curve-drawn .curve-marker {
+  opacity: 1;
+}
+
+/* thin warm scrollbar for drawers */
+.warm-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.warm-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-espresso-600);
+  border-radius: 999px;
+}
+.warm-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+input, select, textarea {
+  outline: none;
+}
