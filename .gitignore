@@ -1,0 +1,31 @@
+# node / frontend
+node_modules/
+dist/
+build/
+*.log
+
+# secrets
+.env
+.env.local
+*.pem
+*.key
+secrets/
+
+# python / django
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.sqlite3
+backend/staticfiles/
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# internal docs (per CLAUDE.md 4.1)
+docs/
+CLAUDE.local.md
+.claude/
